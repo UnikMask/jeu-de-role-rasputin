@@ -60,8 +60,6 @@ frame1=tk.Frame(editor, bg='#fc9403')
 frame1.pack()
 
 photo_stats = tk.PhotoImage(file = r"./Plan-de-travail-6-150x150.png")
-photo_items =
-photo_dialogues = 
 
 stats=tk.Button(frame1, text="Changer les valeurs des Stats", image=photo_stats, compound="top", command=stats_edit_window)
 stats.grid(row="0", column="0", ipady=10, padx=10, pady=10)
