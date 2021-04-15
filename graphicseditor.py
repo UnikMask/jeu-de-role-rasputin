@@ -1,5 +1,5 @@
 import tkinter as tk
-
+#a verifier
 
 def stats_edit_window():
     stats_edit = tk.Tk()
