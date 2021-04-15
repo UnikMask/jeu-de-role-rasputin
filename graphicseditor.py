@@ -40,6 +40,7 @@ def stats_edit_window():
     spinBox_luck.grid(row="3", column="1", ipady=10, padx=10, pady=10)
     spinBox_luck.delete(0)
     spinBox_luck.insert(1, default)
+
     texte = tk.Frame(frame_edit_stats, bg="white")
     texte.grid(row=5, column=0, ipady=50, padx=50, pady=50, columnspan=4)
 
