@@ -1,5 +1,4 @@
 import tkinter as tk
-#a verifier
 
 def stats_edit_window():
     stats_edit = tk.Tk()
@@ -12,61 +11,60 @@ def stats_edit_window():
     frame_edit_stats = tk.Frame(stats_edit, bg="orange")
     frame_edit_stats.pack()
 
+    frame_update = tk.Frame(frame_edit_stats)
+    frame_update.grid(row="5", column="0", ipady=50, padx=50, pady=50)
+    update_text = tk.StringVar(frame_update)
+    update_text.set(" ")
+    tk.Label(frame_edit_stats, textvariable = update_text, font=("Arial", 12), fg="red").grid(row="5", column="0", ipady=50, padx=50, pady=50)
+
+    def update(): #Update nbr des points restants a mettre dans les stats
+        att_update = int(spinBox_att.get())
+        defense_update = int(spinBox_def.get())
+        agi_update = int(spinBox_agi.get())
+        luck_update = int(spinBox_luck.get())
+        nbr_restants = 50 - att_update - defense_update - agi_update - luck_update
+        if nbr_restants < 0:
+            update_text.set("Vous ne pouvez pas faire ca ! Le nombre de points maximum en tout est 50")
+        else:
+            update_text.set("Il vous reste actuellement: " + str(nbr_restants) + " points")
+
     default = 10
+
+    #Creation des spinbox pour les stats
     att = tk.Label(frame_edit_stats, text="Attaque", font=("Arial", 12), fg="black")
     att.grid(row="0", column="0", ipady=10, padx=10, pady=10)
-    spinBox_att = tk.Spinbox(frame_edit_stats, from_=1, to=50, font=('arial', 12, 'normal'), bg='#F0F8FF', width=10)
+    spinBox_att = tk.Spinbox(frame_edit_stats, from_=1, to=50, font=('arial', 12, 'normal'), bg='#F0F8FF', width=10, command=update)
     spinBox_att.grid(row="0", column="1", ipady=10, padx=10, pady=10)
     spinBox_att.delete(0)
     spinBox_att.insert(1, default)
 
     defe = tk.Label(frame_edit_stats, text="Defense", font=("Arial", 12), fg="black")
     defe.grid(row="1", column="0", ipady=10, padx=10, pady=10)
-    spinBox_def = tk.Spinbox(frame_edit_stats, from_=1, to=50, font=('arial', 12, 'normal'), bg='#F0F8FF', width=10)
+    spinBox_def = tk.Spinbox(frame_edit_stats, from_=1, to=50, font=('arial', 12, 'normal'), bg='#F0F8FF', width=10, command=update)
     spinBox_def.grid(row="1", column="1", ipady=10, padx=10, pady=10)
     spinBox_def.delete(0)
     spinBox_def.insert(1, default)
 
     agi = tk.Label(frame_edit_stats, text="Agilite", font=("Arial", 12), fg="black")
     agi.grid(row="2", column="0", ipady=10, padx=10, pady=10)
-    spinBox_agi = tk.Spinbox(frame_edit_stats, from_=1, to=50, font=('arial', 12, 'normal'), bg='#F0F8FF', width=10)
+    spinBox_agi = tk.Spinbox(frame_edit_stats, from_=1, to=50, font=('arial', 12, 'normal'), bg='#F0F8FF', width=10, command=update)
     spinBox_agi.grid(row="2", column="1", ipady=10, padx=10, pady=10)
     spinBox_agi.delete(0)
     spinBox_agi.insert(1, default)
 
     luck = tk.Label(frame_edit_stats, text="Chance", font=("Arial", 12), fg="black")
     luck.grid(row="3", column="0", ipady=10, padx=10, pady=10)
-    spinBox_luck = tk.Spinbox(frame_edit_stats, from_=1, to=50, font=('arial', 12, 'normal'), bg='#F0F8FF', width=10)
+    spinBox_luck = tk.Spinbox(frame_edit_stats, from_=1, to=50, font=('arial', 12, 'normal'), bg='#F0F8FF', width=10, command=update)
     spinBox_luck.grid(row="3", column="1", ipady=10, padx=10, pady=10)
     spinBox_luck.delete(0)
     spinBox_luck.insert(1, default)
 
-    texte = tk.Frame(frame_edit_stats, bg="white")
-    texte.grid(row=5, column=0, ipady=50, padx=50, pady=50, columnspan=4)
+    #def confirmation(): #creation fonction confirmation des points
 
-    mytext = tk.StringVar()
-    mytext.set("dsgfsgsfgfgfgfgfd")
-    mylab1 = tk.Label(texte, text="mytext", font=("Arial", 12), fg="red")
-    mylab = tk.Label(stats_edit, textvariable=mytext, font=("Arial", 12), fg="red")
-    mylab1.pack()
-    mylab.pack()
+    confirm = tk.Button(frame_edit_stats, text="Confirmer vos points des stats ?", font=("Arial", 16), fg="green") #command=confirmation)
+    confirm.grid(row=5, column=1, ipady=50, padx=50, pady=50)
 
-    # def update():
-    #     att_update = int(spinBox_att.get())
-    #     defense_update = int(spinBox_def.get())
-    #     agi_update = int(spinBox_agi.get())
-    #     luck_update = int(spinBox_luck.get())
-    #     nbr_restants = 50 - att_update - defense_update - agi_update - luck_update
-    #     if nbr_restants < 0:
-    #         mytext.set("Vous ne pouvez pas faire ca ! Le nombre de points maximum en tout est 50")
-    #     else:
-    #         mytext.set( "Il vous reste actuellement:" + str(nbr_restants ) + "points")
-    #
-    #
-    # mise_a_jour = tk.Button(frame_edit_stats, text="Mettre a jour le nombre de points restants", command=update)
-    # mise_a_jour.grid(row="4", column="1", ipady=10, padx=10, pady=10)
-    #
-    # editor.destroy()
+    editor.destroy()
 
 # creation de la fenetre editor tkinter
 editor = tk.Tk()
@@ -81,8 +79,7 @@ frame1.pack()
 
 photo_stats = tk.PhotoImage(file=r"./Plan-de-travail-6-150x150.png")
 
-stats = tk.Button(frame1, text="Changer les valeurs des Stats", image=photo_stats, compound="top",
-                  command=stats_edit_window)
+stats = tk.Button(frame1, text="Changer les valeurs des Stats", image=photo_stats, compound="top", command=stats_edit_window)
 stats.grid(row="0", column="0", ipady=10, padx=10, pady=10)
 
 items = tk.Button(frame1, text="Ajouter des items et definir l'inventaire dans votre jeu")  # command=items_edit_window
