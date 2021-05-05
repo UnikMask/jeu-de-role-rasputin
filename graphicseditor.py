@@ -73,7 +73,7 @@ def stats_edit_window():
         stats_edit.withdraw()
         editor.deiconify()
 
-    confirm = tk.Button(frame_edit_stats, text="Confirmer vos points des stats ?", font=("Arial", 16), fg="green", command=confirmation)
+    confirm = tk.Button(frame_edit_stats, text="Confirmer vos points de stats ?", font=("Arial", 16), fg="green", command=confirmation)
     confirm.grid(row=5, column=1, ipady=50, padx=50, pady=50)
 
     editor.withdraw()
@@ -83,6 +83,8 @@ def items_edit_window():
     items_edit.configure(bg="#e9d49c")
     items_edit.geometry("1080x720")
     tk.Label(items_edit, text="Ajouter des objets dans votre jeu", bg="#e9d49c", font=("Arial", 20, "bold"),fg="black").pack(side="top", pady=50)
+    frame_items = tk.Frame(items_edit, bg="#e9d49c")
+    armes = tk.Button(frame_items, text="Ajouter des armes")
 
     editor.withdraw()
 
